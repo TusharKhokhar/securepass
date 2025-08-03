@@ -7,6 +7,7 @@ import { AdSpace } from '../components/AdSpace';
 import { SecureTips } from '../components/SecureTips';
 import { useTheme } from '../components/ThemeProvider';
 import { useToast } from '@/hooks/use-toast';
+import { ADSENSE_CONFIG, shouldShowAds } from '../config/adsense';
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
@@ -48,7 +49,13 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
       {/* Top AdSense Banner */}
-      <AdSpace size="banner" className="mb-6" />
+      <AdSpace 
+        size="banner" 
+        className="mb-6"
+        adClient={ADSENSE_CONFIG.CLIENT_ID}
+        adSlot={ADSENSE_CONFIG.AD_SLOTS.TOP_BANNER}
+        showPlaceholder={!shouldShowAds()}
+      />
 
       {/* Header */}
       <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-slate-200 dark:border-slate-700">
@@ -114,15 +121,31 @@ export default function Home() {
           {/* Right Sidebar: Desktop Ads */}
           <div className="lg:col-span-2 hidden lg:block">
             <div className="sticky top-8 space-y-6">
-              <AdSpace size="sidebar" />
-              <AdSpace size="square" />
+              <AdSpace 
+                size="sidebar"
+                adClient={ADSENSE_CONFIG.CLIENT_ID}
+                adSlot={ADSENSE_CONFIG.AD_SLOTS.SIDEBAR_1}
+                showPlaceholder={!shouldShowAds()}
+              />
+              <AdSpace 
+                size="square"
+                adClient={ADSENSE_CONFIG.CLIENT_ID}
+                adSlot={ADSENSE_CONFIG.AD_SLOTS.SIDEBAR_2}
+                showPlaceholder={!shouldShowAds()}
+              />
             </div>
           </div>
         </div>
 
         {/* In-Content Ad Block */}
         <div className="mt-12">
-          <AdSpace size="banner" className="rounded-2xl" />
+          <AdSpace 
+            size="banner" 
+            className="rounded-2xl"
+            adClient={ADSENSE_CONFIG.CLIENT_ID}
+            adSlot={ADSENSE_CONFIG.AD_SLOTS.IN_CONTENT}
+            showPlaceholder={!shouldShowAds()}
+          />
         </div>
 
         {/* Secure Tips Section */}
@@ -133,7 +156,13 @@ export default function Home() {
 
       {/* Mobile Sticky Ad Bar */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50">
-        <AdSpace size="mobile" className="shadow-lg rounded-none" />
+        <AdSpace 
+          size="mobile" 
+          className="shadow-lg rounded-none"
+          adClient={ADSENSE_CONFIG.CLIENT_ID}
+          adSlot={ADSENSE_CONFIG.AD_SLOTS.MOBILE_STICKY}
+          showPlaceholder={!shouldShowAds()}
+        />
       </div>
 
       {/* Mobile Install Button */}
