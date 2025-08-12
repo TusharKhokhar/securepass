@@ -49,13 +49,13 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
       {/* Top AdSense Banner */}
-      <AdSpace 
+      {/* <AdSpace 
         size="banner" 
         className="mb-6"
         adClient={ADSENSE_CONFIG.CLIENT_ID}
         adSlot={ADSENSE_CONFIG.AD_SLOTS.TOP_BANNER}
         showPlaceholder={!shouldShowAds()}
-      />
+      /> */}
 
       {/* Header */}
       <header className="bg-white dark:bg-slate-800 shadow-sm border-b border-slate-200 dark:border-slate-700">
@@ -119,7 +119,7 @@ export default function Home() {
           </div>
 
           {/* Right Sidebar: Desktop Ads */}
-          <div className="lg:col-span-2 hidden lg:block">
+          {/* <div className="lg:col-span-2 hidden lg:block">
             <div className="sticky top-8 space-y-6">
               <AdSpace 
                 size="sidebar"
@@ -134,11 +134,11 @@ export default function Home() {
                 showPlaceholder={!shouldShowAds()}
               />
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* In-Content Ad Block */}
-        <div className="mt-12">
+        {/* <div className="mt-12">
           <AdSpace 
             size="banner" 
             className="rounded-2xl"
@@ -146,7 +146,7 @@ export default function Home() {
             adSlot={ADSENSE_CONFIG.AD_SLOTS.IN_CONTENT}
             showPlaceholder={!shouldShowAds()}
           />
-        </div>
+        </div> */}
 
         {/* Secure Tips Section */}
         <div className="mt-12">
@@ -155,7 +155,7 @@ export default function Home() {
       </div>
 
       {/* Mobile Sticky Ad Bar */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50">
+      {/* <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50">
         <AdSpace 
           size="mobile" 
           className="shadow-lg rounded-none"
@@ -163,7 +163,7 @@ export default function Home() {
           adSlot={ADSENSE_CONFIG.AD_SLOTS.MOBILE_STICKY}
           showPlaceholder={!shouldShowAds()}
         />
-      </div>
+      </div> */}
 
       {/* Mobile Install Button */}
       {showInstallButton && (
