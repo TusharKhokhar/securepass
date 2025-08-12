@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Shield, Sun, Moon } from 'lucide-react';
-import { PasswordGenerator } from '../components/PasswordGenerator';
-import { PasswordStrengthChecker } from '../components/PasswordStrengthChecker';
-import { AdSpace } from '../components/AdSpace';
-import { SecureTips } from '../components/SecureTips';
-import { useTheme } from '../components/ThemeProvider';
-import { useToast } from '@/hooks/use-toast';
-import { ADSENSE_CONFIG, shouldShowAds } from '../config/adsense';
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Shield, Sun, Moon } from "lucide-react";
+import { PasswordGenerator } from "../components/PasswordGenerator";
+import { PasswordStrengthChecker } from "../components/PasswordStrengthChecker";
+import { AdSpace } from "../components/AdSpace";
+import { SecureTips } from "../components/SecureTips";
+import { useTheme } from "../components/ThemeProvider";
+import { useToast } from "@/hooks/use-toast";
+import { ADSENSE_CONFIG, shouldShowAds } from "../config/adsense";
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
@@ -22,10 +22,13 @@ export default function Home() {
       setShowInstallButton(true);
     };
 
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
     };
   }, []);
 
@@ -34,14 +37,14 @@ export default function Home() {
 
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
-    
-    if (outcome === 'accepted') {
+
+    if (outcome === "accepted") {
       toast({
         title: "App Installed",
         description: "SecurePass Pro has been installed successfully!",
       });
     }
-    
+
     setDeferredPrompt(null);
     setShowInstallButton(false);
   };
@@ -66,11 +69,15 @@ export default function Home() {
                 <Shield className="text-white w-5 h-5" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-slate-900 dark:text-white">SecurePass Pro</h1>
-                <p className="text-sm text-slate-500 dark:text-slate-400">Password Generator & Checker</p>
+                <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+                  SecurePass Pro
+                </h1>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  Password Generator & Checker
+                </p>
               </div>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               {/* Install PWA Button */}
               {showInstallButton && (
@@ -92,8 +99,12 @@ export default function Home() {
                 className="relative inline-flex items-center h-8 w-14 rounded-full bg-slate-200 dark:bg-slate-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-slate-800"
               >
                 <span className="sr-only">Toggle dark mode</span>
-                <span className={`inline-block w-6 h-6 transform bg-white dark:bg-slate-800 rounded-full shadow-lg transition-transform duration-300 ${theme === 'dark' ? 'translate-x-7' : 'translate-x-1'}`}>
-                  {theme === 'dark' ? (
+                <span
+                  className={`inline-block w-6 h-6 transform bg-white dark:bg-slate-800 rounded-full shadow-lg transition-transform duration-300 ${
+                    theme === "dark" ? "translate-x-7" : "translate-x-1"
+                  }`}
+                >
+                  {theme === "dark" ? (
                     <Moon className="text-slate-400 w-4 h-4 flex items-center justify-center h-full w-full" />
                   ) : (
                     <Sun className="text-yellow-500 w-4 h-4 flex items-center justify-center h-full w-full" />
@@ -107,7 +118,6 @@ export default function Home() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
           {/* Left Section: Password Generator */}
           <div className="lg:col-span-5">
             <PasswordGenerator />
@@ -164,6 +174,20 @@ export default function Home() {
           showPlaceholder={!shouldShowAds()}
         />
       </div> */}
+
+      <footer className="bg-gray-900 text-gray-300 py-6 text-center text-sm mt-8">
+        <p>
+          © {new Date().getFullYear()} SecurePass Pro. All rights reserved.
+          {" | "}
+          <a href="/terms" className="hover:text-white underline">
+            Terms of Use
+          </a>
+          {" | "}
+          <a href="/privacy" className="hover:text-white underline">
+            Privacy Policy
+          </a>
+        </p>
+      </footer>
 
       {/* Mobile Install Button */}
       {showInstallButton && (
