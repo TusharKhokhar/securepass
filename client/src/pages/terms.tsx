@@ -14,19 +14,6 @@ export default function TermsPage() {
       </Helmet>
 
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors">
-        <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-          <div className="max-w-7xl mx-auto px-4 py-6 flex items-center gap-4">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
-              <Shield className="text-white w-5 h-5" />
-            </div>
-            <div>
-              <h1 className="text-lg font-bold">SecurePass Pro</h1>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                Terms of Use
-              </p>
-            </div>
-          </div>
-        </header>
 
         <main className="max-w-4xl mx-auto px-4 py-10">
           <section className="prose dark:prose-invert max-w-none">
