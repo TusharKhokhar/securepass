@@ -3,11 +3,13 @@ import { Link, useLocation } from 'wouter';
 import { Shield, Menu, X, Home, BookOpen, HelpCircle, Info, FileText, Users, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/hooks/useTheme';
+import { useAnalytics } from '@/hooks/useAnalytics';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
+  const { trackThemeToggle, trackButtonClick } = useAnalytics();
 
   const navigation = [
     { name: 'Home', href: '/', icon: Home },
@@ -18,7 +20,7 @@ export function Navbar() {
     { name: 'FAQ', href: '/faq', icon: Users },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => location[0] === path;
 
   return (
     <nav className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50">
@@ -56,7 +58,11 @@ export function Navbar() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={toggleTheme}
+              onClick={() => {
+                toggleTheme();
+                trackThemeToggle(theme === 'dark' ? 'light' : 'dark');
+                trackButtonClick('theme_toggle');
+              }}
               className="hidden md:flex"
             >
               <Settings className="w-4 h-4" />

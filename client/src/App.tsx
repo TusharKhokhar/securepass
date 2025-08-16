@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { Navbar } from "./components/Navbar";
+import { useEffect } from "react";
+import { initGA } from "./config/analytics";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
 import TermsPage from "@/pages/terms";
@@ -32,6 +34,10 @@ function Router() {
 }
 
 function App() {
+  useEffect(() => {
+    initGA();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>

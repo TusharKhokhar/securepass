@@ -5,9 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Eye, EyeOff, TrendingUp, Check, X, Lightbulb } from 'lucide-react';
 import { usePasswordStrength } from '../hooks/usePasswordStrength';
 import { cn } from '@/lib/utils';
+import { useAnalytics } from '@/hooks/useAnalytics';
 
 export function PasswordStrengthChecker() {
   const { password, setPassword, showPassword, togglePasswordVisibility, strength } = usePasswordStrength();
+  const { trackPasswordChecked, trackButtonClick } = useAnalytics();
 
   const getCheckIcon = (isValid: boolean) => {
     return isValid ? (
@@ -47,7 +49,12 @@ export function PasswordStrengthChecker() {
               type={showPassword ? 'text' : 'password'}
               placeholder="Type or paste a password..."
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (e.target.value.length > 0) {
+                  trackPasswordChecked('checking', e.target.value.length);
+                }
+              }}
               className="pr-12 bg-slate-50 dark:bg-slate-700 border-slate-200 dark:border-slate-600 focus:ring-primary focus:border-primary"
             />
             <Button

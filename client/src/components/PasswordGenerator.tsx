@@ -11,11 +11,13 @@ import { usePasswordHistory } from '../hooks/usePasswordHistory';
 import { calculatePasswordStrength, getTimeAgo } from '../utils/passwordUtils';
 import { exportPasswordsAsTxt, exportPasswordsAsCsv } from '../utils/exportUtils';
 import { useToast } from '@/hooks/use-toast';
+import { useAnalytics } from '@/hooks/useAnalytics';
 
 export function PasswordGenerator() {
   const { options, updateOptions, generatedPasswords, generateMultiplePasswords, isGenerating } = usePasswordGenerator();
   const { history, addToHistory, clearHistory } = usePasswordHistory();
   const { toast } = useToast();
+  const { trackPasswordGenerated, trackButtonClick, trackCopyToClipboard, trackFeatureUsage } = useAnalytics();
 
   const handleGeneratePasswords = () => {
     // Validate that at least one character type is selected
@@ -32,17 +34,24 @@ export function PasswordGenerator() {
     }
 
     generateMultiplePasswords();
+    
+    // Track password generation
+    trackPasswordGenerated(options.length, options.includeSymbols, options.includeNumbers);
+    trackButtonClick('generate_passwords');
   };
 
   const copyToClipboard = async (password: string) => {
     try {
       await navigator.clipboard.writeText(password);
       addToHistory(password);
+      trackCopyToClipboard('password');
+      trackButtonClick('copy_password');
       toast({
         title: "Copied!",
         description: "Password copied to clipboard.",
       });
     } catch (error) {
+      trackFeatureUsage('copy_clipboard', 'error');
       toast({
         title: "Copy Failed",
         description: "Failed to copy password to clipboard.",
